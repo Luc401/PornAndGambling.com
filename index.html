@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- PornAndGamling.Com -->
+<html>
+<body>
+	<h1> Black Jack Development</h1>
+<button onclick="newGame()">Start a New Game</button>
+<button onclick="newCard()">Another Card</button>
+<br>
+<br>
+<label id="lblresults"></label>
+<br>
+<br>
+<label id="lblnextcard"></label>
+<p id="demo"></p>
+
+
+<script>
+var sum;
+var deck= [null,
+			1,1,1,1,
+			2,2,2,2,
+			3,3,3,3,
+			4,4,4,4,
+			5,5,5,5,
+			6,6,6,6,
+			7,7,7,7,
+			8,8,8,8,
+			9,9,9,9,
+			10,10,10,10,
+			10,10,10,10,
+			10,10,10,10,];
+function newGame(){
+	deck= [null,
+		1,1,1,1,
+		2,2,2,2,
+		3,3,3,3,
+		4,4,4,4,
+		5,5,5,5,
+		6,6,6,6,
+		7,7,7,7,
+		8,8,8,8,
+		9,9,9,9,
+		10,10,10,10,
+		10,10,10,10,
+		10,10,10,10,];
+	playGame();
+}
+function playGame(){
+	console.clear();
+	var card1,card2;	
+	//pull 2 cards
+	slot=Math.floor(Math.random() * 48) + 1;
+	card1=deck[slot];
+	slot=Math.floor(Math.random() * 48) + 1;
+	card2=deck[slot];
+	//print 2 cards
+	console.log("The first card is "+card1);
+	console.log("The second card is "+card2);
+	// if card 1 is a 1 ask user if they want a 11 or 1
+	if (card1==1){
+		card1=cardDecide(card1);
+		console.log("The 1 is now a "+card1);
+		deck[slot]=0;
+	}
+	else{
+		deck[slot]=0;
+	}
+	//if card2 is a 1 ask user if they want a 11 or 1
+	if (card2==1){
+		card2=cardDecide(card2);
+		console.log("The 1 is now a "+card2);
+	}
+	deck[slot]=0;
+	sum=card1+card2;
+	
+	document.getElementById('lblresults').innerHTML = "The sum of the cards "+sum;
+	document.getElementById('lblnextcard').innerHTML = "Cick the 'Another Card' Button for another card";
+}
+function newCard(){
+	slot=Math.floor(Math.random() * 48) + 1;
+	cardNew=deck[slot];
+	console.log("The new card is a "+cardNew);
+	deck[slot]=0
+	sum=sum+cardNew;
+	document.getElementById('lblresults').innerHTML = "The sum of the cards "+sum;
+	if (sum>21){
+		document.getElementById('lblresults').innerHTML = "YOU FUCKING LOST M80";
+	}
+}
+function cardDecide(card){
+	var reply;
+	reply=prompt("Would you like your card to be a 1 or an 11");
+	if (reply=="11"){
+		card=11;
+		return card;
+	}
+	else if (reply=="1"){
+		card=1;
+		return card;
+	}
+	else{
+		window.alert("Are you drunk? You're getting an 11.");
+		card=11;
+		return card;
+	}
+}
+</script>
+</body>
+</html>
